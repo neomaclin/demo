@@ -22,8 +22,9 @@ import sttp.tapir.{endpoint, stringBody}
 import scala.concurrent.ExecutionContext
 
 package object controller {
+  private val testPath = endpoint.get.in("test").out(stringBody)
   def handleRequest(service: ActorRef)(implicit ec:ExecutionContext): Route = {
     implicit val timeout: Timeout = 0.5.seconds
-    endpoint.get.in("test").out(stringBody).toRoute(_ => (service ? GetMessage).mapTo[String].map(s => Right("Hello from a Scala controller! "+s)))
+    testPath.toRoute(_ => (service ? GetMessage).mapTo[String].map(s => Right("Hello from a Scala controller! "+s)))
   }
 }
