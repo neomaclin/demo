@@ -1,7 +1,7 @@
 package org.neo.zio.service
 
 import akka.actor.Actor
-import org.neo.zio.model.{GetMessage, ServiceConfig}
+import org.neo.zio.model._
 
 class MyService(serviceConfig: ServiceConfig) extends Actor {
   override def receive: Receive = {
